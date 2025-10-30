@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrina Care - Plataforma de Conexão para Cuidados Domiciliares</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1d8fbd 0%, #136383 100%);
+        }
+        
+        .promo-banner {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+		
+		.hero-com-foto {
+			/* 1. SUA IMAGEM DE FUNDO */
+			/* Substitua pela URL da sua foto. Usei uma de exemplo. */
+			background-image: url('fundo.jpg');
+			
+			/* 2. AJUSTES DA IMAGEM */
+			background-size: cover;       /* Faz a imagem cobrir toda a seção */
+			background-position: center;  /* Centraliza a imagem */
+			background-repeat: no-repeat; /* Evita que a imagem se repita */
+			
+			/* 3. EFEITO DE SOBREPOSIÇÃO (OVERLAY) */
+			/* Isso é o mais importante. Usamos 'box-shadow' como um truque 
+				para criar um filtro escuro/azulado por cima da imagem, 
+				garantindo que o texto branco continue legível. */
+			box-shadow: inset 0 0 0 2000px rgba(19, 99, 131, 0.60); /* Azul escuro com 70% de opacidade */
+			
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full">
+  <!-- Promo Banner -->
+  <!--<div class="promo-banner text-white text-center py-3 px-4">
+   <p id="promo-text" class="font-bold text-sm md:text-base">🎉 Promoção: 6 meses grátis para novos assinantes!</p>
+  </div>
+  -->
+  <header class="gradient-bg text-white shadow-lg">
+   <nav class="container mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+     <div class="flex items-center space-x-3">
+      <svg class="w-10 h-10" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /> <circle cx="12" cy="12" r="3" fill="white" />
+      </svg>
+      <h1 id="company-name" class="text-2xl font-bold">Vitrina Care</h1>
+     </div>
+     <div class="hidden md:flex space-x-6"><a href="#benefits" class="hover:text-blue-200 transition-colors">Benefícios</a> <a href="#specialties" class="hover:text-blue-200 transition-colors">Especialidades</a> <a href="#platform" class="hover:text-blue-200 transition-colors">Plataforma</a> <a href="#packages" class="hover:text-blue-200 transition-colors">Pacotes</a>
+     </div>
+    </div>
+   </nav>
+  </header>
+  <main><!-- Hero Section -->
+   <!-- old 
+   <section class="gradient-bg text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+     <div class="fade-in">
+      <h2 id="hero-title" class="text-4xl md:text-6xl font-bold mb-6">Plataforma de Conexão para Cuidados Domiciliares</h2>
+      <p id="hero-subtitle" class="text-xl md:text-2xl mb-8 text-blue-100">Conectamos pacientes (ou seus responsáveis) a profissionais e empresas de saúde que realizam atendimentos domiciliares</p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center items-center"><button id="cta-button-patient" class="bg-white text-[color:#136383] px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg"> Cadastrar-se Grátis (Pacientes) </button> <button id="cta-button-professional" class="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"> 6 Meses Grátis (Profissionais) </button>
+      </div>
+      <div class="mt-8 flex justify-center space-x-8 text-sm">
+       <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+        </svg><span>Disponível em todo Brasil</span>
+       </div>
+       <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg><span>Conexões 24/7</span>
+       </div>
+       <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+        </svg><span>Web + Apps Mobile</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section> 
+   -->
+   <!--<section class="gradient-bg text-white py-20"> -->
+   <section class="hero-com-foto text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+     <div class="fade-in">
+      <h2 id="hero-title" class="text-4xl md:text-6xl font-bold mb-6">Cuidar de quem você ama, sem sair de casa.</h2>
+      <p id="hero-subtitle" class="text-xl md:text-2xl mb-8 text-blue-100">Nossa plataforma aproxima pacientes, familiares, responsáveis e profissionais de saúde, tornando o cuidado domiciliar mais simples e acessível.</p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+		<!--<button id="cta-button-patient" class="bg-white text-[color:#136383] px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg"> Cadastrar-se Grátis (Pacientes) </button> -->
+		<!--<button id="cta-button-professional" class="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"> 6 Meses Grátis (Profissionais) </button> -->
+		<a href="#videos" id="cta-button-professional" class="block mx-auto mt-6 bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"> Cadastre-se já </a>
+      </div>
+      <div class="mt-8 flex justify-center space-x-8 text-sm">
+       <div class="flex items-center space-x-2">
+        <!--<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />-->
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+</svg>
+
+		<span>Em todo Brasil</span>
+       </div>
+       <div class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
+		<span>Conexões 24/7</span>
+       </div>
+       <div class="flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+</svg>
+<span>Computadores, Celulares e Tablets</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Benefits Section -->
+   <section id="benefits" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+     <h3 id="benefits-title" class="text-4xl font-bold text-center mb-16 text-[color:#1d8fbd]">Por que escolher a Vitrina Care?</h3>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-6 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-[color:#1d8fbd] mb-4">
+        
+		<svg class="w-12 h-12 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+  <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+</svg>
+
+
+       </div>
+       <h4 class="text-lg font-semibold mb-3">Rede Confiável</h4>
+       <p class="text-gray-600 text-sm">Conectamos pacientes aos melhores profissionais de saúde para atendimento domiciliar</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-[color:#1d8fbd] mb-4">
+        <svg class="w-12 h-12 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+			<path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+		</svg>
+
+       </div>
+       <h4 class="text-lg font-semibold mb-3">Segurança Total</h4>
+       <p class="text-gray-600 text-sm">Profissionais verificados e empresas credenciadas em nossa plataforma</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-[color:#1d8fbd] mb-4">
+        <svg class="w-12 h-12 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+			<path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
+			<path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+		</svg>
+	   </div>
+       <h4 class="text-lg font-semibold mb-3">Rede de Conexões</h4>
+       <p class="text-gray-600 text-sm">Plataforma que conecta oferta e demanda de cuidados de saúde domiciliar</p>
+      </div>
+      
+     </div>
+	 
+	 <!-- Additional Benefits -->
+	 <!--
+     <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+       <h4 class="text-2xl font-bold mb-6 text-gray-800">Vantagens para Cadastrados</h4>
+       <div class="space-y-4">
+        <div class="flex items-start space-x-3">
+         <div class="bg-green-100 p-2 rounded-full">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          </svg>
+         </div>
+         <div>
+          <h5 class="font-semibold text-gray-800">Negociação Direta</h5>
+          <p class="text-gray-600 text-sm">Vitrina Care não intermedia ou presta serviços de saúde</p>
+         </div>
+        </div>
+        <div class="flex items-start space-x-3">
+         <div class="bg-green-100 p-2 rounded-full">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          </svg>
+         </div>
+         <div>
+          <h5 class="font-semibold text-gray-800">Vídeos Exclusivos</h5>
+          <p class="text-gray-600 text-sm">Orientações para pacientes e treinamento para cuidadores</p>
+         </div>
+        </div>
+        <div class="flex items-start space-x-3">
+         <div class="bg-green-100 p-2 rounded-full">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          </svg>
+         </div>
+         <div>
+          <h5 class="font-semibold text-gray-800">Suporte via Chat</h5>
+          <p class="text-gray-600 text-sm">Atendimento personalizado quando você precisar</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      -->
+     </div>
+    </div>
+   </section>
+   
+<!-- Vídeos Section -->
+   <section id="videos" class="py-20 bg-gradient-to-br from-[color:#1d8fbd] to-[color:#136383]"> 
+    <div class="container mx-auto px-6">
+     <h3 id="benefits-title" class="text-4xl font-bold text-center mb-16 text-blue-100">Conteúdo Exclusivo</h3>
+	 <p class="text-xl text-center text-blue-100 mb-16">Acesse vídeos especializados e materiais exclusivos desenvolvidos por especialistas</p>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-blue-100 p-6 rounded-lg shadow-lg card-hover text-center">
+    
+		<div class="w-full aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
+			<iframe 
+				class="w-full h-full" 
+				src="https://www.youtube.com/embed/hCM9MxnRKyQ?si=vyMfEn1CtfVbefvB" 
+				title="Player de vídeo do YouTube" 
+				frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+				allowfullscreen>
+			</iframe>
+		</div>
+	
+		<h4 class="text-lg text-[color:#136383] font-semibold mb-3">Rede Confiável</h4>
+		<p class="text-gray-600 text-sm">Conectamos pacientes aos melhores profissionais de saúde para atendimento domiciliar</p>
+	  </div>
+      <div class="bg-blue-100 p-6 rounded-lg shadow-lg card-hover text-center">
+    
+		<div class="w-full aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
+			<iframe 
+				class="w-full h-full" 
+				src="https://www.youtube.com/embed/53n1lbFO7Hw" 
+				title="Player de vídeo do YouTube" 
+				frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+				allowfullscreen>
+			</iframe>
+		</div>
+	
+		<h4 class="text-lg text-[color:#136383] font-semibold mb-3">Rede Confiável</h4>
+		<p class="text-gray-600 text-sm">Conectamos pacientes aos melhores profissionais de saúde para atendimento domiciliar</p>
+	  </div>
+	  <div class="bg-blue-100 p-6 rounded-lg shadow-lg card-hover text-center">
+    
+		<div class="w-full aspect-video rounded-lg overflow-hidden mb-4 shadow-md">
+			<iframe 
+				class="w-full h-full" 
+				src="https://www.youtube.com/embed/hCM9MxnRKyQ" 
+				title="Player de vídeo do YouTube" 
+				frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+				allowfullscreen>
+			</iframe>
+		</div>
+	
+		<h4 class="text-lg text-[color:#136383] font-semibold mb-3">Rede Confiável</h4>
+		<p class="text-gray-600 text-sm">Conectamos pacientes aos melhores profissionais de saúde para atendimento domiciliar</p>
+	  </div>
+     </div>
+	 
+      
+     </div>
+	 
+	 <div class="text-center mt-6">
+  
+		<a href="#videos" id="cta-button-professional" class="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg"> Acesse mais vídeos </a>
+	 </div>
+
+   </section>
+   
+   
+<!-- Specialties Section -->
+   
+<section id="specialties" class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    
+    <h3 id="specialties-title" class="text-4xl font-bold text-center mb-4 text-gray-800">Tudo o que você precisa para cuidar de quem ama.</h3>
+    <p class="text-xl text-center text-gray-600 mb-16">Conectamos você a uma rede completa de saúde domiciliar.</p>
+
+    <div class="mb-12">
+      <h4 class="text-3xl font-semibold mb-3 text-gray-700 text-center">O Cuidado Essencial</h4>
+      <p class="text-lg text-center text-gray-600 mb-8">Profissionais para o dia-a-dia e reabilitação.</p>
+      
+      <div class="specialty-grid">
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+          <span class="text-[color:#1d8fbd] font-medium">Cuidadores</span>
+        </div>
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+          <span class="text-[color:#1d8fbd] font-medium">Enfermagem</span>
+        </div>
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+           <span class="text-[color:#1d8fbd] font-medium">Fisioterapia</span>
+        </div>
+        <div class="bg-blue-50 p-4 rounded-lg text-center">
+		  <span class="text-[color:#1d8fbd] font-medium">Fonoaudiologia</span>
+        </div>
+      </div>
+    </div>
+
+	<div class="mb-12">
+      <h4 class="text-3xl font-semibold mb-3 text-gray-700 text-center">Médicos à sua Porta</h4>
+      <p class="text-lg text-center text-gray-600 mb-8">Consultas médicas de diversas especialidades.</p>
+      
+      <div class="specialty-grid">
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Clínico Geral</span></div>
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Geriatria</span></div>
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Cardiologia</span></div>
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Neurologia</span></div>
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Pediatria</span></div>
+        <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-green-600 font-medium">Psiquiatria</span></div>
+        <div class="bg-yellow-100 p-4 rounded-lg text-center"><span class="text-yellow-600 font-medium">... e muitas outras!</span></div>
+      </div>
+    </div>
+	
+    <div class="mb-12">
+      <h4 class="text-3xl font-semibold mb-3 text-gray-700 text-center">Saúde, Mente e Nutrição</h4>
+      <p class="text-lg text-center text-gray-600 mb-8">Especialistas para um cuidado integral.</p>
+      
+      <div class="specialty-grid">
+        <div class="bg-blue-50 p-5 rounded-lg text-center shadow-sm">
+          <span class="text-blue-600 font-medium">Nutrição Domiciliar</span>
+        </div>
+        <div class="bg-blue-50 p-5 rounded-lg text-center shadow-sm">
+          <span class="text-blue-600 font-medium">Psicologia e Psicoterapia</span>
+        </div>
+        <div class="bg-blue-50 p-5 rounded-lg text-center shadow-sm">
+          <span class="text-blue-600 font-medium">Terapia Ocupacional</span>
+        </div>
+        <div class="bg-blue-50 p-5 rounded-lg text-center shadow-sm">
+          <span class="text-blue-600 font-medium">Saúde Bucal (Odontologia)</span>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <div class="mb-12">
+      <h4 class="text-3xl font-semibold mb-3 text-gray-700 text-center">Bem-Estar e Cuidado Integrativo</h4>
+      <p class="text-lg text-center text-gray-600 mb-8">Tratamentos alternativos para complementar sua saúde.</p>
+      
+      <div class="specialty-grid">
+        <div class="bg-purple-50 p-4 rounded-lg text-center"><span class="text-purple-600 font-medium">Acupuntura</span></div>
+        <div class="bg-purple-50 p-4 rounded-lg text-center"><span class="text-purple-600 font-medium">Massoterapia e Shiatsu</span></div>
+        <div class="bg-purple-50 p-4 rounded-lg text-center"><span class="text-purple-600 font-medium">Homeopatia e Fitoterapia</span></div>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h4 class="text-3xl font-semibold mb-3 text-gray-700 text-center">Soluções Completas para o Cuidado</h4>
+      <p class="text-lg text-center text-gray-600 mb-8">Tudo o que você precisa em um só lugar.</p>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-orange-50 p-6 rounded-lg shadow-sm">
+          <h5 class="text-lg font-bold text-orange-700 mb-2">Exames em Casa</h5>
+          <p class="text-sm text-orange-600">Realize exames como Ultrassom, Eletrocardiograma, MAPA, Holter e outros sem sair do lar.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
+          <h5 class="text-lg font-bold text-gray-700 mb-2">Aluguel de Equipamentos</h5>
+          <p class="text-sm text-gray-600">Facilite a rotina com camas hospitalares, cadeiras de rodas, e mais.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+   
+   <!-- Platform Section -->
+   <section id="platform" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+     <h3 id="platform-title" class="text-4xl font-bold text-center mb-16 text-gray-800">Acesse Nossa Plataforma</h3>
+     <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white p-8 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-blue-600 mb-4">
+        <svg class="w-16 h-16 mx-auto" fill="currentColor" viewbox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-semibold mb-4">Aplicativo Web</h4>
+       <p class="text-gray-600 mb-6">Funcionalidades completas para profissionais e empresas</p><button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full"> Acessar Aplicativo Web </button>
+      </div>
+      <div class="bg-white p-8 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-green-600 mb-4">
+        <svg class="w-16 h-16 mx-auto" fill="currentColor" viewbox="0 0 24 24"><path d="M17.71 7.71L12 2h-2v5H7.41l4.29 4.29c.39.39.39 1.02 0 1.41L7.41 17H10v5h2l5.71-5.71c.39-.39.39-1.02 0-1.41L13.41 11l4.3-4.29z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-semibold mb-4">App iOS</h4>
+       <p class="text-gray-600 mb-6">Conexão rápida para pacientes e profissionais</p><button class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors w-full"> Download iOS </button>
+      </div>
+      <div class="bg-white p-8 rounded-lg shadow-lg card-hover text-center">
+       <div class="text-green-600 mb-4">
+        <svg class="w-16 h-16 mx-auto" fill="currentColor" viewbox="0 0 24 24"><path d="M17.71 7.71L12 2h-2v5H7.41l4.29 4.29c.39.39.39 1.02 0 1.41L7.41 17H10v5h2l5.71-5.71c.39-.39.39-1.02 0-1.41L13.41 11l4.3-4.29z" />
+        </svg>
+       </div>
+       <h4 class="text-xl font-semibold mb-4">App Android</h4>
+       <p class="text-gray-600 mb-6">Conexão rápida para pacientes e profissionais</p><button class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors w-full"> Download Android </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Packages Section -->
+   <section id="packages" class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+     <h3 class="text-4xl font-bold mb-8 text-gray-800">Para Profissionais e Empresas</h3>
+     <p class="text-xl text-gray-600 mb-12">Veja nossos pacotes de assinatura e comece a expandir sua rede de atendimentos</p>
+     <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-12 rounded-lg shadow-xl">
+      <h4 class="text-3xl font-bold mb-4">Oferta Especial</h4>
+      <p class="text-xl mb-8">6 meses grátis para novos profissionais e empresas</p><button class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg"> Ver Pacotes de Assinatura </button>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-800 text-white py-12">
+   <div class="container mx-auto px-6">
+    <div class="text-center">
+     <div class="flex justify-center items-center space-x-3 mb-4">
+      <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /> <circle cx="12" cy="12" r="3" fill="white" />
+      </svg><span class="text-2xl font-bold">Vitrina Care</span>
+     </div>
+     <p id="footer-text" class="text-gray-300">© 2024 Vitrina Care. Todos os direitos reservados.<br>
+      Conectando cuidados onde você estiver.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            company_name: "Vitrina Care",
+            promo_text: "🎉 Promoção: 6 meses grátis para novos assinantes!",
+            hero_title: "Plataforma de Conexão para Cuidados Domiciliares",
+            hero_subtitle: "Conectamos pacientes (ou seus responsáveis) a profissionais e empresas de saúde que realizam atendimentos domiciliares",
+            cta_button_patient: "Cadastrar-se Grátis (Pacientes)",
+            cta_button_professional: "6 Meses Grátis (Profissionais)",
+            benefits_title: "Por que escolher a Vitrina Care?",
+            specialties_title: "Especialidades Disponíveis",
+            platform_title: "Acesse Nossa Plataforma",
+            footer_text: "© 2024 Vitrina Care. Todos os direitos reservados.\nConectando cuidados onde você estiver.",
+            primary_color: "#3b82f6",
+            secondary_color: "#1e40af",
+            accent_color: "#10b981",
+            text_color: "#374151",
+            surface_color: "#f9fafb",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        // Element SDK implementation
+        const element = {
+            defaultConfig,
+            onConfigChange: async (config) => {
+                // Update text content
+                document.getElementById('company-name').textContent = config.company_name || defaultConfig.company_name;
+                document.getElementById('promo-text').textContent = config.promo_text || defaultConfig.promo_text;
+                document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+                document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+                document.getElementById('cta-button-patient').textContent = config.cta_button_patient || defaultConfig.cta_button_patient;
+                document.getElementById('cta-button-professional').textContent = config.cta_button_professional || defaultConfig.cta_button_professional;
+                document.getElementById('benefits-title').textContent = config.benefits_title || defaultConfig.benefits_title;
+                document.getElementById('specialties-title').textContent = config.specialties_title || defaultConfig.specialties_title;
+                document.getElementById('platform-title').textContent = config.platform_title || defaultConfig.platform_title;
+                document.getElementById('footer-text').innerHTML = (config.footer_text || defaultConfig.footer_text).replace('\n', '<br>');
+
+                // Update colors
+                const primaryColor = config.primary_color || defaultConfig.primary_color;
+                const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+                const accentColor = config.accent_color || defaultConfig.accent_color;
+                const textColor = config.text_color || defaultConfig.text_color;
+                const surfaceColor = config.surface_color || defaultConfig.surface_color;
+
+                // Apply gradient backgrounds
+                const gradientElements = document.querySelectorAll('.gradient-bg');
+                gradientElements.forEach(el => {
+                    el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+                });
+
+                // Apply accent color to buttons
+                document.getElementById('cta-button-professional').style.backgroundColor = accentColor;
+                
+                // Apply text color
+                const textElements = document.querySelectorAll('h3, h4, p');
+                textElements.forEach(el => {
+                    if (!el.closest('.gradient-bg') && !el.closest('footer') && !el.closest('.promo-banner')) {
+                        el.style.color = textColor;
+                    }
+                });
+
+                // Apply surface color
+                const surfaceElements = document.querySelectorAll('.bg-gray-50');
+                surfaceElements.forEach(el => {
+                    el.style.backgroundColor = surfaceColor;
+                });
+
+                // Update font
+                const customFont = config.font_family || defaultConfig.font_family;
+                const baseFontStack = 'system-ui, -apple-system, sans-serif';
+                document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+                // Update font sizes
+                const baseSize = config.font_size || defaultConfig.font_size;
+                document.getElementById('hero-title').style.fontSize = `${baseSize * 2.5}px`;
+                document.getElementById('hero-subtitle').style.fontSize = `${baseSize * 1.25}px`;
+                document.getElementById('benefits-title').style.fontSize = `${baseSize * 2}px`;
+                document.getElementById('specialties-title').style.fontSize = `${baseSize * 2}px`;
+                document.getElementById('platform-title').style.fontSize = `${baseSize * 2}px`;
+            },
+            mapToCapabilities: (config) => ({
+                recolorables: [
+                    {
+                        get: () => config.primary_color || defaultConfig.primary_color,
+                        set: (value) => {
+                            config.primary_color = value;
+                            window.elementSdk.setConfig({ primary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            config.secondary_color = value;
+                            window.elementSdk.setConfig({ secondary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || defaultConfig.accent_color,
+                        set: (value) => {
+                            config.accent_color = value;
+                            window.elementSdk.setConfig({ accent_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            window.elementSdk.setConfig({ text_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            window.elementSdk.setConfig({ surface_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        window.elementSdk.setConfig({ font_family: value });
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        window.elementSdk.setConfig({ font_size: value });
+                    }
+                }
+            }),
+            mapToEditPanelValues: (config) => new Map([
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["promo_text", config.promo_text || defaultConfig.promo_text],
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["cta_button_patient", config.cta_button_patient || defaultConfig.cta_button_patient],
+                ["cta_button_professional", config.cta_button_professional || defaultConfig.cta_button_professional],
+                ["benefits_title", config.benefits_title || defaultConfig.benefits_title],
+                ["specialties_title", config.specialties_title || defaultConfig.specialties_title],
+                ["platform_title", config.platform_title || defaultConfig.platform_title],
+                ["footer_text", config.footer_text || defaultConfig.footer_text]
+            ])
+        };
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init(element);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // CTA button functionality
+        document.getElementById('cta-button-patient').addEventListener('click', function() {
+            // Simulate patient registration
+            const message = document.createElement('div');
+            message.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50';
+            message.textContent = 'Redirecionando para cadastro de pacientes...';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        });
+
+        document.getElementById('cta-button-professional').addEventListener('click', function() {
+            // Simulate professional registration
+            const message = document.createElement('div');
+            message.className = 'fixed top-4 right-4 bg-blue-500 text-white p-4 rounded-lg shadow-lg z-50';
+            message.textContent = 'Redirecionando para cadastro de profissionais...';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        });
+
+        // Platform buttons functionality
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Acessar') || button.textContent.includes('Download') || button.textContent.includes('Ver Pacotes') || button.textContent.includes('Assistir')) {
+                button.addEventListener('click', function() {
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-blue-500 text-white p-4 rounded-lg shadow-lg z-50';
+                    message.textContent = 'Funcionalidade em desenvolvimento...';
+                    document.body.appendChild(message);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(message);
+                    }, 3000);
+                });
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996381ec37b8cb00',t:'MTc2MTc0OTY1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
